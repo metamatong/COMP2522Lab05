@@ -3,14 +3,15 @@ package ca.bcit.comp2522.bookstore;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: javadoc comments, implementing methods, testing outputs
 class BookStore
 {
     private String bookStoreName;
     private final List<Novel> novels;
 
-    BookStore(final String bookStoreName) {
-
-        this.bookStoreName = bookStoreName;
+    BookStore(final String bookStoreName)
+    {
+        this.bookStoreName = validateBookStoreName(bookStoreName);
 
         novels = new ArrayList<>();
 
@@ -147,4 +148,14 @@ class BookStore
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
 
     }
+
+    private static String validateBookStoreName(final String bookStoreName)
+    {
+        if (bookStoreName == null || bookStoreName.trim().isEmpty())
+        {
+            throw new IllegalArgumentException("Title cannot be null or empty.");
+        }
+        return bookStoreName;
+    }
+
 }

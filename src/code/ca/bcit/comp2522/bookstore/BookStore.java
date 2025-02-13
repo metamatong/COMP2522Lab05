@@ -127,10 +127,19 @@ class BookStore
      */
     public boolean isThereABookWrittenIn(final int year)
     {
+
+        if(year < 0)
+        {
+            return false;
+        }
+
         for(final Novel novel : novels)
         {
-            if(novel.getYearPublished() == year)
-                return true;
+            if(novel != null)
+            {
+                if(novel.getYearPublished() == year)
+                    return true;
+            }
         }
         return false;
     }
@@ -142,14 +151,23 @@ class BookStore
      */
     public int howManyBooksContain(final String word)
     {
+
+        if(word == null || word.isEmpty())
+        {
+            return ZERO;
+        }
+
         int countOfBooksContainingThisWord;
         countOfBooksContainingThisWord = ZERO;
 
         for(final Novel novel: novels)
         {
-            if(novel.getTitle().contains(word))
+            if(novel != null && novel.getTitle() != null)
             {
-                countOfBooksContainingThisWord++;
+                if(novel.getTitle().toLowerCase().contains(word.toLowerCase()))
+                {
+                    countOfBooksContainingThisWord++;
+                }
             }
         }
         return countOfBooksContainingThisWord;

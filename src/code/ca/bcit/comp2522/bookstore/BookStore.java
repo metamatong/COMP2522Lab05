@@ -6,6 +6,8 @@ import java.util.List;
 // TODO: javadoc comments, implementing methods, testing outputs
 class BookStore
 {
+    private static final int ZERO = 0;
+
     private final String bookStoreName;
     private final List<Novel> novels;
 
@@ -131,6 +133,26 @@ class BookStore
                 return true;
         }
         return false;
+    }
+
+    /**
+     * This method returns the number of books with titles containing the given word.
+     * @param word the word to search in title of books
+     * @return the number of books with title containing the given word.
+     */
+    public int howManyBooksContain(final String word)
+    {
+        int countOfBooksContainingThisWord;
+        countOfBooksContainingThisWord = ZERO;
+
+        for(final Novel novel: novels)
+        {
+            if(novel.getTitle().contains(word))
+            {
+                countOfBooksContainingThisWord++;
+            }
+        }
+        return countOfBooksContainingThisWord;
     }
 
     public static void main(final String[] args)

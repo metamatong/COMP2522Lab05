@@ -6,6 +6,8 @@ import java.util.List;
 // TODO: javadoc comments, implementing methods, testing outputs
 class BookStore
 {
+    private static final int ZERO = 0;
+
     private final String bookStoreName;
     private final List<Novel> novels;
 
@@ -115,6 +117,60 @@ class BookStore
         novels.add(new Novel("White Noise", "Don DeLillo", 1985));
         novels.add(new Novel("White Teeth", "Zadie Smith", 2000));
         novels.add(new Novel("Wide Sargasso Sea", "Jean Rhys", 1966));
+    }
+
+    /**
+     * A method to find out whether there is at least one book written in given year.
+     *
+     * @param year the published year to search through.
+     * @return whether there is any book published in given year.
+     */
+    public boolean isThereABookWrittenIn(final int year)
+    {
+
+        if(year < 0)
+        {
+            return false;
+        }
+
+        for(final Novel novel : novels)
+        {
+            if(novel != null)
+            {
+                if(novel.getYearPublished() == year)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * This method returns the number of books with titles containing the given word.
+     * @param word the word to search in title of books
+     * @return the number of books with title containing the given word.
+     */
+    public int howManyBooksContain(final String word)
+    {
+
+        if(word == null || word.isEmpty())
+        {
+            return ZERO;
+        }
+
+        int countOfBooksContainingThisWord;
+        countOfBooksContainingThisWord = ZERO;
+
+        for(final Novel novel: novels)
+        {
+            if(novel != null && novel.getTitle() != null)
+            {
+                if(novel.getTitle().toLowerCase().contains(word.toLowerCase()))
+                {
+                    countOfBooksContainingThisWord++;
+                }
+            }
+        }
+        return countOfBooksContainingThisWord;
     }
 
     public static void main(final String[] args)

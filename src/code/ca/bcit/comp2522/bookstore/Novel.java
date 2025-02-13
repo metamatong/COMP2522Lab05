@@ -1,4 +1,4 @@
-package ca.bcit.comp2522.bookstore;
+package code.ca.bcit.comp2522.bookstore;
 
 /**
  * Represents a novel with a title, an author, and a publication year.

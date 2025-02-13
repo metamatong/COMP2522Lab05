@@ -117,6 +117,16 @@ class BookStore
         novels.add(new Novel("Wide Sargasso Sea", "Jean Rhys", 1966));
     }
 
+    public boolean isThereABookWrittenIn(final int year)
+    {
+        for(final Novel novel : novels)
+        {
+            if(novel.getYearPublished() == year)
+                return true;
+        }
+        return false;
+    }
+
     public static void main(final String[] args)
     {
         final BookStore bookstore;

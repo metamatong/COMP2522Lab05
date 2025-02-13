@@ -6,7 +6,7 @@ import java.util.List;
 // TODO: javadoc comments, implementing methods, testing outputs
 class BookStore
 {
-    private String bookStoreName;
+    private final String bookStoreName;
     private final List<Novel> novels;
 
     BookStore(final String bookStoreName)

@@ -9,9 +9,9 @@ package ca.bcit.comp2522.bookstore;
  */
 class Novel
 {
-    private String title;
-    private String author;
-    private int yearPublished;
+    private final String title;
+    private final String author;
+    private final int yearPublished;
 
     /**
      * Constructs a new {@code Novel} with the specified title, author, and publication year.

@@ -117,6 +117,12 @@ class BookStore
         novels.add(new Novel("Wide Sargasso Sea", "Jean Rhys", 1966));
     }
 
+    /**
+     * A method to find out whether there is at least one book written in given year.
+     *
+     * @param year the published year to search through.
+     * @return whether there is any book published in given year.
+     */
     public boolean isThereABookWrittenIn(final int year)
     {
         for(final Novel novel : novels)

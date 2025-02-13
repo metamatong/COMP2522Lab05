@@ -29,6 +29,36 @@ class Novel
         this.yearPublished = validateYearPublished(yearPublished);
     }
 
+    /**
+     * Returns the title of the novel.
+     *
+     * @return the title of the novel
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * Returns the name of the author of the novel.
+     *
+     * @return the author's name
+     */
+    public String getAuthorName()
+    {
+        return author;
+    }
+
+    /**
+     * Returns the year the novel was published.
+     *
+     * @return the publication year
+     */
+    public int getYearPublished()
+    {
+        return yearPublished;
+    }
+
     /*
      * Validates the title of the novel.
      *
@@ -74,36 +104,6 @@ class Novel
         {
             throw new IllegalArgumentException("Year published must be greater than 0.");
         }
-        return yearPublished;
-    }
-
-    /**
-     * Returns the title of the novel.
-     *
-     * @return the title of the novel
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * Returns the name of the author of the novel.
-     *
-     * @return the author's name
-     */
-    public String getAuthorName()
-    {
-        return author;
-    }
-
-    /**
-     * Returns the year the novel was published.
-     *
-     * @return the publication year
-     */
-    public int getYearPublished()
-    {
         return yearPublished;
     }
 }

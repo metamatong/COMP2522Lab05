@@ -1,4 +1,4 @@
-package code.ca.bcit.comp2522.bookstore;
+package ca.bcit.comp2522.bookstore;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -126,6 +126,29 @@ class BookStore
     }
 
     /**
+     * Get the longest title novel from the novels list
+     * @return The title of novel with the longest title.
+     */
+    public String getLongest()
+    {
+        Novel longestTitleNovel;
+        longestTitleNovel = novels.get(0);
+
+        if(!novels.isEmpty())
+        {
+            for(final Novel novel : novels)
+            {
+                if(novel.getTitle().length() > longestTitleNovel.getTitle().length())
+                {
+                    longestTitleNovel = novel;
+                }
+            }
+        }
+
+        return longestTitleNovel.getTitle();
+    }
+
+    /**
      * A method to find out whether there is at least one book written in given year.
      *
      * @param year the published year to search through.

@@ -1,4 +1,4 @@
-package code.ca.bcit.comp2522.bookstore;
+package ca.bcit.comp2522.bookstore;
 
 /**
  * Represents a novel with a title, an author, and a publication year.
@@ -7,7 +7,7 @@ package code.ca.bcit.comp2522.bookstore;
  * @author Kyle Cheon
  * @version 1.0
  */
-class Novel
+class Novel implements Comparable<Novel>
 {
     private final String title;
     private final String author;
@@ -59,6 +59,21 @@ class Novel
         return yearPublished;
     }
 
+    /**
+     * Compares this novel with the given novel.
+     * Novel is to be compared lexically using the respective titles.
+     * @param novel the object to be compared.
+     * @return an int that is negative if this Novel appears first,
+     * zero if they are equal, and
+     * positive if this Novel appears after.
+     */
+    public int compareTo(final Novel novel)
+    {
+        final int titleComparison;
+        titleComparison = this.getTitle().compareTo(novel.getTitle());
+        return titleComparison;
+    }
+
     /*
      * Validates the title of the novel.
      *
@@ -68,8 +83,7 @@ class Novel
      */
     private static String validateTitle(final String title)
     {
-        if (title == null || title.trim().isEmpty())
-        {
+        if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be null or empty.");
         }
         return title;
@@ -84,8 +98,7 @@ class Novel
      */
     private static String validateAuthor(final String author)
     {
-        if (author == null || author.trim().isEmpty())
-        {
+        if (author == null || author.trim().isEmpty()) {
             throw new IllegalArgumentException("Author cannot be null or empty.");
         }
         return author;
@@ -100,8 +113,7 @@ class Novel
      */
     private static int validateYearPublished(final int yearPublished)
     {
-        if (yearPublished <= 0)
-        {
+        if (yearPublished <= 0) {
             throw new IllegalArgumentException("Year published must be greater than 0.");
         }
         return yearPublished;

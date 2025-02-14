@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// TODO: javadoc comments, implementing methods, testing outputs
 /**
  * Represents a bookstore with a bookstore name and
  * list of books owned.
@@ -17,6 +16,7 @@ class BookStore
     private static final int ZERO = 0;
     private static final int DECADE = 10;
     private static final int DECADE_RANGE = 9;
+    private static final int PERCENTAGE_DENOMINATOR = 100;
 
     private final String bookStoreName;
     private final List<Novel> novels;
@@ -130,6 +130,27 @@ class BookStore
     }
 
     /**
+     * Print the longest title novel from the novels list
+     */
+    public void getLongest()
+    {
+        Novel longestTitleNovel;
+        longestTitleNovel = novels.getFirst();
+
+        if(!novels.isEmpty())
+        {
+            for(final Novel novel : novels)
+            {
+                if(novel.getTitle().length() > longestTitleNovel.getTitle().length())
+                {
+                    longestTitleNovel = novel;
+                }
+            }
+        }
+        System.out.println(longestTitleNovel.getTitle());
+    }
+
+    /**
      * A method to find out whether there is at least one book written in given year.
      *
      * @param year the published year to search through.
@@ -161,10 +182,9 @@ class BookStore
      */
     public int howManyBooksContain(final String word)
     {
-
         if(word == null || word.isEmpty())
         {
-            return ZERO;
+            throw new IllegalArgumentException("Cannot determine book titles containing blanks.");
         }
 
         int countOfBooksContainingThisWord;
@@ -260,6 +280,91 @@ class BookStore
      * Runs the main program.
      * @param args (unused).
      */
+    /**
+     * Calculates and returns percentage of books written in the given period.
+     * @param first is the starting year of the given period.
+     * @param last is the ending year of the given period.
+     * @return the percentage of the books in between the given period.
+     */
+    public int whichPercentWrittenBetween(final int first,
+                                          final int last)
+    {
+        if(first < 0 || last < 0 || last < first)
+        {
+            throw new IllegalArgumentException("Wrong year. Please enter correct years.");
+        }
+
+        int novelsPublishedInBetween;
+        boolean novelIsPublishedInBetween;
+        int resultInPercentage;
+
+        novelsPublishedInBetween = ZERO;
+
+        for(final Novel novel: novels)
+        {
+            novelIsPublishedInBetween = novel != null &&
+                                        novel.getYearPublished() >= first &&
+                                        novel.getYearPublished() <= last;
+            if(novelIsPublishedInBetween)
+            {
+                novelsPublishedInBetween++;
+            }
+        }
+        resultInPercentage = novelsPublishedInBetween * PERCENTAGE_DENOMINATOR / novels.size();
+
+        return resultInPercentage;
+    }
+
+    /**
+     * Fetches oldest novel in the novels list.
+     * @return the oldest novel object.
+     */
+    public Novel getOldestBook()
+    {
+        Novel oldestNovel;
+        oldestNovel = novels.getFirst();
+
+        for(final Novel novel: novels)
+        {
+            boolean novelIsOlder;
+            novelIsOlder = novel.getYearPublished() < oldestNovel.getYearPublished();
+
+            if(novel != null && novelIsOlder)
+            {
+                oldestNovel = novel;
+            }
+        }
+
+        return oldestNovel;
+    }
+
+    /**
+     * Returns the list of books with given length of title.
+     * @return the list of books that has given title length.
+     */
+    public List<Novel> getBooksThisLength(final int titleLength)
+    {
+        final List<Novel> booksThisLength;
+        booksThisLength = new ArrayList<>();
+
+        for(final Novel novel: novels)
+        {
+            boolean novelTitleLengthMatches;
+            novelTitleLengthMatches = novel.getTitle().length() == titleLength;
+
+            if(novel != null && novelTitleLengthMatches)
+            {
+                booksThisLength.add(novel);
+            }
+        }
+
+        return booksThisLength;
+    }
+
+    /**
+     * Drives the bookstore and novel methods and test them.
+     * @param args
+     */
     public static void main(final String[] args)
     {
         final BookStore bookstore;
@@ -278,7 +383,7 @@ class BookStore
         System.out.println("\nLongest Book Title:");
         bookstore.getLongest();
         System.out.println("\nIs there a book written in 1950?");
-        System.out.println(bookstore.isThereABookWrittenBetween(1950));
+        System.out.println(bookstore.isThereABookWrittenIn(1950));
         System.out.println("\nHow many books contain 'heart'?");
         System.out.println(bookstore.howManyBooksContain("heart"));
         System.out.println("\nPercentage of books written between 1940 and 1950:");
@@ -289,13 +394,18 @@ class BookStore
         System.out.println("\nBooks with titles 15 characters long:");
         fifteenCharTitles = bookstore.getBooksThisLength(15);
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
-        //System.out.println("Books by decade: 2000s");
-        //bookstore.printGroupByDecade(2000);
+        System.out.println("Books by decade: 2000s");
+        bookstore.printGroupByDecade(2000);
     }
 
+    /*
+     * validates book store names to make sure they are not empty.
+     * @param bookStoreName is the string for book store's name.
+     * @return validated book store name.
+     */
     private static String validateBookStoreName(final String bookStoreName)
     {
-        if (bookStoreName == null || bookStoreName.trim().isEmpty())
+        if(bookStoreName == null || bookStoreName.trim().isEmpty())
         {
             throw new IllegalArgumentException("Title cannot be null or empty.");
         }

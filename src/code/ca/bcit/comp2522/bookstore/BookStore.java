@@ -3,7 +3,12 @@ package ca.bcit.comp2522.bookstore;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: javadoc comments, implementing methods, testing outputs
+/**
+ * Class that represents a book store.
+ * @author Clinton Nguyen
+ * @author Kyle Cheon
+ * @version 1.0
+ */
 class BookStore
 {
     private static final int ZERO = 0;
@@ -128,7 +133,6 @@ class BookStore
      */
     public boolean isThereABookWrittenIn(final int year)
     {
-
         if(year < 0)
         {
             return false;
@@ -152,7 +156,6 @@ class BookStore
      */
     public int howManyBooksContain(final String word)
     {
-
         if(word == null || word.isEmpty())
         {
             throw new IllegalArgumentException("Cannot determine book titles containing blanks.");
@@ -209,6 +212,56 @@ class BookStore
         return resultInPercentage;
     }
 
+    /**
+     * Fetches oldest novel in the novels list.
+     * @return the oldest novel object.
+     */
+    public Novel getOldestBook()
+    {
+        Novel oldestNovel;
+        oldestNovel = novels.getFirst();
+
+        for(final Novel novel: novels)
+        {
+            boolean novelIsOlder;
+            novelIsOlder = novel.getYearPublished() < oldestNovel.getYearPublished();
+
+            if(novel != null && novelIsOlder)
+            {
+                oldestNovel = novel;
+            }
+        }
+
+        return oldestNovel;
+    }
+
+    /**
+     * Returns the list of books with given length of title.
+     * @return the list of books that has given title length.
+     */
+    public List<Novel> getBooksThisLength(final int titleLength)
+    {
+        final List<Novel> booksThisLength;
+        booksThisLength = new ArrayList<>();
+
+        for(final Novel novel: novels)
+        {
+            boolean novelTitleLengthMatches;
+            novelTitleLengthMatches = novel.getTitle().length() == titleLength;
+
+            if(novel != null && novelTitleLengthMatches)
+            {
+                booksThisLength.add(novel);
+            }
+        }
+
+        return booksThisLength;
+    }
+
+    /**
+     * Drives the bookstore and novel methods and test them.
+     * @param args
+     */
     public static void main(final String[] args)
     {
         final BookStore bookstore;
@@ -227,7 +280,7 @@ class BookStore
         System.out.println("\nLongest Book Title:");
         bookstore.getLongest();
         System.out.println("\nIs there a book written in 1950?");
-        System.out.println(bookstore.isThereABookWrittenBetween(1950));
+        System.out.println(bookstore.isThereABookWrittenIn(1950));
         System.out.println("\nHow many books contain 'heart'?");
         System.out.println(bookstore.howManyBooksContain("heart"));
         System.out.println("\nPercentage of books written between 1940 and 1950:");

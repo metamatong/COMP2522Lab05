@@ -7,6 +7,7 @@ import java.util.List;
 class BookStore
 {
     private static final int ZERO = 0;
+    private static final int PERCENTAGE_DENOMINATOR = 100;
 
     private final String bookStoreName;
     private final List<Novel> novels;
@@ -154,7 +155,7 @@ class BookStore
 
         if(word == null || word.isEmpty())
         {
-            return ZERO;
+            throw new IllegalArgumentException("Cannot determine book titles containing blanks.");
         }
 
         int countOfBooksContainingThisWord;
@@ -171,6 +172,41 @@ class BookStore
             }
         }
         return countOfBooksContainingThisWord;
+    }
+
+    /**
+     * Calculates and returns percentage of books written in the given period.
+     * @param first is the starting year of the given period.
+     * @param last is the ending year of the given period.
+     * @return the percentage of the books in between the given period.
+     */
+    public int whichPercentWrittenBetween(final int first,
+                                          final int last)
+    {
+        if(first < 0 || last < 0 || last < first)
+        {
+            throw new IllegalArgumentException("Wrong year. Please enter correct years.");
+        }
+
+        int novelsPublishedInBetween;
+        boolean novelIsPublishedInBetween;
+        int resultInPercentage;
+
+        novelsPublishedInBetween = ZERO;
+
+        for(final Novel novel: novels)
+        {
+            novelIsPublishedInBetween = novel != null &&
+                                        novel.getYearPublished() >= first &&
+                                        novel.getYearPublished() <= last;
+            if(novelIsPublishedInBetween)
+            {
+                novelsPublishedInBetween++;
+            }
+        }
+        resultInPercentage = novelsPublishedInBetween * PERCENTAGE_DENOMINATOR / novels.size();
+
+        return resultInPercentage;
     }
 
     public static void main(final String[] args)
@@ -221,9 +257,14 @@ class BookStore
         }
     }
 
+    /*
+     * validates book store names to make sure they are not empty.
+     * @param bookStoreName is the string for book store's name.
+     * @return validated book store name.
+     */
     private static String validateBookStoreName(final String bookStoreName)
     {
-        if (bookStoreName == null || bookStoreName.trim().isEmpty())
+        if(bookStoreName == null || bookStoreName.trim().isEmpty())
         {
             throw new IllegalArgumentException("Title cannot be null or empty.");
         }

@@ -1,6 +1,13 @@
 package ca.bcit.comp2522.bookstore;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 
 /**
  * Represents a bookstore with a bookstore name and
@@ -148,7 +155,8 @@ class BookStore
             bookstoreMap.put(novel.getTitle(), novel);
         }
 
-        Set<String> keySet = bookstoreMap.keySet();
+        final Set<String> keySet;
+        keySet = bookstoreMap.keySet();
 
         final List<String> keyList;
         keyList = new ArrayList<>(keySet);

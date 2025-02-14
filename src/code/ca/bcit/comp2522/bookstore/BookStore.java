@@ -126,6 +126,27 @@ class BookStore
     }
 
     /**
+     * Print the longest title novel from the novels list
+     */
+    public void getLongest()
+    {
+        Novel longestTitleNovel;
+        longestTitleNovel = novels.getFirst();
+
+        if(!novels.isEmpty())
+        {
+            for(final Novel novel : novels)
+            {
+                if(novel.getTitle().length() > longestTitleNovel.getTitle().length())
+                {
+                    longestTitleNovel = novel;
+                }
+            }
+        }
+        System.out.println(longestTitleNovel.getTitle());
+    }
+
+    /**
      * A method to find out whether there is at least one book written in given year.
      *
      * @param year the published year to search through.
@@ -271,12 +292,12 @@ class BookStore
         bookstore = new BookStore("Classic Novels Collection");
         System.out.println("All Titles in UPPERCASE:");
         bookstore.printAllTitles();
-        System.out.println("\nBook Titles Containing 'the':");
-        bookstore.printBookTitle("the");
-        System.out.println("\nAll Titles in Alphabetical Order:");
-        bookstore.printTitlesInAlphaOrder();
-        System.out.println("\nBooks from the 2000s:");
-        bookstore.printGroupByDecade(2000);
+//        System.out.println("\nBook Titles Containing 'the':");
+//        bookstore.printBookTitle("the");
+//        System.out.println("\nAll Titles in Alphabetical Order:");
+//        bookstore.printTitlesInAlphaOrder();
+//        System.out.println("\nBooks from the 2000s:");
+//        bookstore.printGroupByDecade(2000);
         System.out.println("\nLongest Book Title:");
         bookstore.getLongest();
         System.out.println("\nIs there a book written in 1950?");

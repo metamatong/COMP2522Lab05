@@ -126,13 +126,12 @@ class BookStore
     }
 
     /**
-     * Get the longest title novel from the novels list
-     * @return The title of novel with the longest title.
+     * Print the longest title novel from the novels list
      */
-    public String getLongest()
+    public void getLongest()
     {
         Novel longestTitleNovel;
-        longestTitleNovel = novels.get(0);
+        longestTitleNovel = novels.getFirst();
 
         if(!novels.isEmpty())
         {
@@ -144,8 +143,7 @@ class BookStore
                 }
             }
         }
-
-        return longestTitleNovel.getTitle();
+        System.out.println(longestTitleNovel.getTitle());
     }
 
     /**
@@ -294,12 +292,12 @@ class BookStore
         bookstore = new BookStore("Classic Novels Collection");
         System.out.println("All Titles in UPPERCASE:");
         bookstore.printAllTitles();
-        System.out.println("\nBook Titles Containing 'the':");
-        bookstore.printBookTitle("the");
-        System.out.println("\nAll Titles in Alphabetical Order:");
-        bookstore.printTitlesInAlphaOrder();
-        System.out.println("\nBooks from the 2000s:");
-        bookstore.printGroupByDecade(2000);
+//        System.out.println("\nBook Titles Containing 'the':");
+//        bookstore.printBookTitle("the");
+//        System.out.println("\nAll Titles in Alphabetical Order:");
+//        bookstore.printTitlesInAlphaOrder();
+//        System.out.println("\nBooks from the 2000s:");
+//        bookstore.printGroupByDecade(2000);
         System.out.println("\nLongest Book Title:");
         bookstore.getLongest();
         System.out.println("\nIs there a book written in 1950?");

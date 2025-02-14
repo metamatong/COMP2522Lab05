@@ -74,6 +74,27 @@ class Novel implements Comparable<Novel>
         return titleComparison;
     }
 
+    @Override
+    public String toString()
+    {
+        final StringBuilder builder;
+        final String result;
+        builder = new StringBuilder();
+
+        builder.append("Title: ");
+        builder.append(title);
+        builder.append("\n");
+        builder.append("Author: ");
+        builder.append(author);
+        builder.append("\n");
+        builder.append("Year Published: ");
+        builder.append(yearPublished);
+        builder.append("\n");
+        result = builder.toString();
+
+        return result;
+    }
+
     /*
      * Validates the title of the novel.
      *
@@ -83,7 +104,8 @@ class Novel implements Comparable<Novel>
      */
     private static String validateTitle(final String title)
     {
-        if (title == null || title.trim().isEmpty()) {
+        if(title == null || title.trim().isEmpty())
+        {
             throw new IllegalArgumentException("Title cannot be null or empty.");
         }
         return title;
@@ -98,7 +120,8 @@ class Novel implements Comparable<Novel>
      */
     private static String validateAuthor(final String author)
     {
-        if (author == null || author.trim().isEmpty()) {
+        if(author == null || author.trim().isEmpty())
+        {
             throw new IllegalArgumentException("Author cannot be null or empty.");
         }
         return author;
@@ -113,7 +136,8 @@ class Novel implements Comparable<Novel>
      */
     private static int validateYearPublished(final int yearPublished)
     {
-        if (yearPublished <= 0) {
+        if(yearPublished <= 0)
+        {
             throw new IllegalArgumentException("Year published must be greater than 0.");
         }
         return yearPublished;

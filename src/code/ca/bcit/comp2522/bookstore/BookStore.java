@@ -1,8 +1,6 @@
 package ca.bcit.comp2522.bookstore;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a bookstore with a bookstore name and
@@ -24,7 +22,6 @@ class BookStore
     BookStore(final String bookStoreName)
     {
         this.bookStoreName = validateBookStoreName(bookStoreName);
-
         novels = new ArrayList<>();
 
         novels.add(new Novel("The Adventures of Augie March", "Saul Bellow", 1953));
@@ -127,6 +124,41 @@ class BookStore
         novels.add(new Novel("White Noise", "Don DeLillo", 1985));
         novels.add(new Novel("White Teeth", "Zadie Smith", 2000));
         novels.add(new Novel("Wide Sargasso Sea", "Jean Rhys", 1966));
+
+        final List<Novel> copyOfNovels;
+        copyOfNovels = copyNovels(novels);
+
+        final Iterator<Novel> it;
+        it = copyOfNovels.iterator();
+
+        while(it.hasNext())
+        {
+            if(it.next().getTitle().toLowerCase().contains("the"))
+            {
+                it.remove();
+            }
+        }
+
+
+        final Map<String, Novel> bookstoreMap;
+        bookstoreMap = new HashMap<>();
+
+        for(Novel novel : copyOfNovels)
+        {
+            bookstoreMap.put(novel.getTitle(), novel);
+        }
+
+        Set<String> keySet = bookstoreMap.keySet();
+
+        final List<String> keyList;
+        keyList = new ArrayList<>(keySet);
+
+        Collections.sort(keyList);
+
+        for(String key : keyList)
+        {
+            System.out.println(bookstoreMap.get(key).toString());
+        }
     }
 
     /**
@@ -208,9 +240,9 @@ class BookStore
      */
     public void printAllTitles()
     {
-        for (Novel novel : novels)
+        for(Novel novel : novels)
         {
-            if (novel != null)
+            if(novel != null)
             {
                 final String titleToUppercase;
                 titleToUppercase = novel.getTitle().toUpperCase();
@@ -225,11 +257,11 @@ class BookStore
      */
     public void printBookTitle(final String title)
     {
-        for (Novel novel : novels)
+        for(Novel novel : novels)
         {
-            if (novel != null)
+            if(novel != null)
             {
-                if (novel.getTitle().contains(title))
+                if(novel.getTitle().contains(title))
                 {
                     System.out.println(novel.getTitle());
                 }
@@ -245,7 +277,7 @@ class BookStore
         final List<Novel> sortedNovels;
         sortedNovels = copyNovels(novels);
         Collections.sort(sortedNovels);
-        for (Novel novel : sortedNovels)
+        for(Novel novel : sortedNovels)
         {
             System.out.println(novel.getTitle());
         }
@@ -254,22 +286,25 @@ class BookStore
     /**
      * Prints all books for the inputted decade.
      * IE 2000s -> print all book titles from 2000 - 2009.
-     * @param decade
+     * @param decade is the decade bound to check.
      */
     public void printGroupByDecade(final int decade)
     {
-        if (decade < 0 || (decade % DECADE != 0))
+        if(decade < 0 || (decade % DECADE != 0))
         {
             throw new IllegalArgumentException("The decade must be a positive multiple of a decade.");
         }
 
-        for (Novel novel : novels) {
-            if (novel != null) {
+        for(Novel novel : novels)
+        {
+            if(novel != null)
+            {
                 final int novelPublishedYear;
                 novelPublishedYear = novel.getYearPublished();
 
-                if (novelPublishedYear >= decade &&
-                        novelPublishedYear <= (decade + DECADE_RANGE)) {
+                if(novelPublishedYear >= decade &&
+                        novelPublishedYear <= (decade + DECADE_RANGE))
+                {
                     System.out.println(novel.getTitle() + ", " + novel.getYearPublished());
                 }
             }
@@ -417,7 +452,8 @@ class BookStore
      * @param novels is the list of novels to copy.
      * @return the copied list of novels.
      */
-    private static List<Novel> copyNovels(final List<Novel> novels) {
+    private static List<Novel> copyNovels(final List<Novel> novels)
+    {
         final List<Novel> copyOfNovels;
         copyOfNovels= new ArrayList<>(novels);
         return copyOfNovels;

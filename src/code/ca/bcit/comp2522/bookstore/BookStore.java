@@ -1,4 +1,4 @@
-package ca.bcit.comp2522.bookstore;
+package code.ca.bcit.comp2522.bookstore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,6 +203,22 @@ class BookStore
         fifteenCharTitles = bookstore.getBooksThisLength(15);
         fifteenCharTitles.forEach(novel -> System.out.println(novel.getTitle()));
 
+    }
+
+    /**
+     * Prints all titles in uppercase.
+     */
+    public void printAllTitles()
+    {
+        for (Novel novel : novels)
+        {
+            if (novel != null)
+            {
+                final String titleToUppercase;
+                titleToUppercase = novel.getTitle().toUpperCase();
+                System.out.println(titleToUppercase);
+            }
+        }
     }
 
     private static String validateBookStoreName(final String bookStoreName)

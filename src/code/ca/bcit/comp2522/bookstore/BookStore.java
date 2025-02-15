@@ -135,18 +135,6 @@ class BookStore
         final List<Novel> copyOfNovels;
         copyOfNovels = copyNovels(novels);
 
-        final Iterator<Novel> it;
-        it = copyOfNovels.iterator();
-
-        while(it.hasNext())
-        {
-            if(it.next().getTitle().toLowerCase().contains("the"))
-            {
-                it.remove();
-            }
-        }
-
-
         final Map<String, Novel> bookstoreMap;
         bookstoreMap = new HashMap<>();
 
@@ -155,8 +143,18 @@ class BookStore
             bookstoreMap.put(novel.getTitle(), novel);
         }
 
+        final Iterator<String> it;
         final Set<String> keySet;
         keySet = bookstoreMap.keySet();
+        it = keySet.iterator();
+
+        while(it.hasNext())
+        {
+            if(it.next().toLowerCase().contains("the"))
+            {
+                it.remove();
+            }
+        }
 
         final List<String> keyList;
         keyList = new ArrayList<>(keySet);

@@ -318,10 +318,6 @@ class BookStore
     }
 
     /**
-     * Runs the main program.
-     * @param args (unused).
-     */
-    /**
      * Calculates and returns percentage of books written in the given period.
      * @param first is the starting year of the given period.
      * @param last is the ending year of the given period.
